@@ -1,0 +1,14 @@
+#tạo user mới
+useradd vuonghm
+#set pass cho user vừa tạo
+passwd vuonghm
+Changing password for user vuonghm.
+New password:
+Retype new password:
+passwd: all authentication tokens updated successfully.
+# Dùng lệnh usermod để thêm user vừa tạo vào nhóm wheel
+usermod -aG wheel vuonghm
+# Dùng sudo hoặc su để kiểm tra
+su vuonghm hoặc sudo vuonghm
+# Gõ sudo  phía trước lệnh bạn muốn chạy với quyền superuser:
+vd : sudo ls -la /home/vuonghm/
