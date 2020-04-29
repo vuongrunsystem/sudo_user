@@ -1,0 +1,7 @@
+# Dùng putty keygen để tạo cặp public_key và private key
+# Nếu muốn dùng key này thì copy public key vào file "~/.ssh/authorized_keys"
+# SSH key của root thì điền public_key vào đây
+vim ~/.ssh/authorized_keys
+# đối với user
+# tạo file authorized_keys trong thư mục của user sau đó điền public_key vào:
+vim /home/vuonghm/authorized_keys
