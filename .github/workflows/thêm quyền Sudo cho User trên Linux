@@ -1,0 +1,60 @@
+Hướng dẫn thêm quyền Sudo cho User trên Linux
+
+Sudo là gì?, sudo(chữ viết tắt của Superuser Do) là một chương trình của linux. Sudo sẽ cho phép user chạy chương trình với các đặc quyền bảo mật của user khác trong linux, Đối với user gõ lệnh Sudo, thì họ sẽ được hỏi mật khẩu của chính họ để xác nhận gửi yêu cầu thay vì sử dụng lệnh Su là chuyển sang tài khoản root và nhập mật khẩu của root
+
+Người ta dùng lệnh Sudo khi không muốn dùng trực tiếp user root để quản trị, giải pháp ở đây sẽ là thêm quyền Sudo cho user khác và đăng nhập bằng user đó để quản trị
+
+Bây giờ chúng ta sẽ cùng tìm hiểu nếu user không được thêm quyền sudo thì sẽ ra sao
+
+Các bạn đăng nhập SSH bằng một user tự tạo
+
+Các bạn sẽ gõ một lệnh bất kì
+
+VD: Ở đây lệnh tôi chạy update dưới danh nghĩ user paste
+
+# yum update -y
+kết quả sẽ trả về là
+
+Loaded plugins: fastestmirror
+You need to be root to perform this command.(Bạn cần phải là root để thực hiện lệnh này)
+Bây giờ chúng ta sẽ gõ thêm lệnh sudo ở đầu lệnh
+
+# sudo yum update -y
+Kết quả trả về là
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+#1) Respect the privacy of others.
+#2) Think before you type.
+#3) With great power comes great responsibility.
+
+[sudo] password for paste:
+paste is not in the sudoers file. This incident will be reported. (user này không có quyền chạy lệnh sudo ,và sự cố này sẽ bị báo cáo)
+
+
+Bây giờ chúng ta sẽ thêm quyền sudo cho user
+
+Để thêm quyền sudo cho các user khác chúng ta sẽ cần đăng nhập user root, vậy hãy gõ lệnh su và nhập mật khẩu root
+
+# su
+Sau khi đăng nhập được vào user root ta mở file /etc/sudoers
+
+# nano /etc/sudoers
+Bạn sẽ tìm thấy dòng có nội dung như sau
+
+## Allows people in group wheel to run all commands (cho phép mọi người dùng trong nhóm này chạy được tất cả các lệnh)
+%wheel ALL=(ALL) ALL
+Và thêm vào tên nhóm mà bạn muốn ,ở đây vì đã tạo user paste lên máy cũng đã tự tạo group paste ,vậy tôi sử dụng group paste luôn
+%paste   ALL=(ALL)      ALL
+
+
+Save file lại và thoát 
+
+Gõ exit để đăng xuất user root
+
+# exit
+Gõ lại lệnh 
+
+# sudo yum update -y
+Nhập mật khẩu của user paste , bây giờ lệnh update đã được chạy 
