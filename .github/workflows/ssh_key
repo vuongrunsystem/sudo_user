@@ -5,3 +5,11 @@ vim ~/.ssh/authorized_keys
 # đối với user
 # tạo file authorized_keys trong thư mục của user sau đó điền public_key vào:
 vim /home/vuonghm/authorized_keys
+# tắt xác thực mật khẩu
+sudo vi /etc/ssh/sshd_config
+PasswordAuthentication no
+# Cho phép SSH key
+PubkeyAuthentication yes
+AuthorizedKeysFile      .ssh/authorized_keys
+# khởi động lại SSH
+systemctl restart sshd
